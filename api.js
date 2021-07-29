@@ -1,42 +1,37 @@
-let summoner_id = "CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8";
+const tierWeights = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27"];
+let inputName = "";
+let summoner_list = new Array(10);
+let count = 0;
 
-// fetch(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d`, {mode: 'no-cors'}).then((response) => 
-//     console.log(response)
-// );
+function getSummoner_name(){
+    inputName = document.getElementById("inputName").value;
+    getSummoner_id(inputName);
+}
 
-fetch("https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d")
-    .then((res) => { 
-        console.log(res);  
-        return res.json(); 
-    }).then(data => {
-        console.log(data);   
-    }).catch(err => {
-        console.log('Fatch Error', err);
-});
+function getSummoner_id(summoner_name){
+    fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner_name}?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d`)
+        .then((res) => {
+            console.log(res);
+            return res.json();
+        }).then(data => {
+            console.log(data.id);
+            getSummoner_tier(data.id);
+        }).catch(err => {
+            console.log("summoner_id_API Error", err);
+        })    
+}
 
-// fetch('https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d',{mode:"no-cors"})
-//     .then(res => {
-//     // response 처리
-//     console.log(res);
-//     // 응답을 JSON 형태로 파싱
-//     return res.json();
-// })
-// .then(data => {
-//     // json 출력
-//     console.log(data)
-// })
-// .catch(err => {
-//     // error 처리
-//     console.log('Fetch Error', err);
-// });
-
-// var api_key = 'RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d';
-// var sohwan = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" +'벗돌이' +'?api_key=' + api_key;
-// console.log(sohwan);
-// var r = fetch(sohwan, {mode: "no-cors"}).then(res => {
-//     console.log(res);
-// })
-
-// fetch('https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d')
-//     .then((response) => console.log("response:", response))
-//     .catch((error) => console.log("error:", error));
+function getSummoner_tier(summoner_id){
+    fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d`)
+        .then((res) => { 
+            console.log(res);  
+            return res.json();
+        }).then(data => {
+            console.log(data);   
+            summoner_list[count] = data[0].tier + data[0].rank;
+            console.log(summoner_list[count]);
+            count++;
+        }).catch(err => {
+            console.log('Tier_API Error', err);
+    });
+}
