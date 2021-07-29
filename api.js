@@ -4,15 +4,15 @@ let summoner_id = "CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8";
 //     console.log(response)
 // );
 
-// fetch("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d", {mode: 'no-cors'})
-//     .then((res) => { 
-//         console.log(res);  
-//         return res.json(); 
-//     }).then(data => {
-//         console.log(data);   
-//     }).catch(err => {
-//         console.log('Fatch Error', err);
-// });
+fetch("https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d")
+    .then((res) => { 
+        console.log(res);  
+        return res.json(); 
+    }).then(data => {
+        console.log(data);   
+    }).catch(err => {
+        console.log('Fatch Error', err);
+});
 
 // fetch('https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d',{mode:"no-cors"})
 //     .then(res => {
@@ -37,14 +37,6 @@ let summoner_id = "CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8";
 //     console.log(res);
 // })
 
-fetch('https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d')
-    .then((response) => console.log("response:", response))
-    .catch((error) => console.log("error:", error));
-
-fetch("https://jsonplaceholder.typicode.com/posts/1",{mode:"no-cors"})
-.then((response) => console.log("response:", response))
-.catch((error) => console.log("error:", error));
-    
-fetch("https://jsonplaceholder.typicode.com/posts/1",{mode:"no-cors"})
-.then((response) => console.log("response:", response))
-.catch((error) => console.log("error:", error));
+// fetch('https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/CLl2xwUmy0fKRB4Fj8gd8MyIlmHFNF0guU65RIEN0vRMvY8?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d')
+//     .then((response) => console.log("response:", response))
+//     .catch((error) => console.log("error:", error));
