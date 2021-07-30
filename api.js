@@ -7,6 +7,14 @@ let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
 
+function shuffleArray(score_list){
+    for(let i = 0; i < 10; i++){
+        let j = Math.floor(Math.random() * (i + 1));
+        [score_list[i], score_list[j]] = [score_list[j], score_list[i]];
+    }
+    return score_list;
+}
+
 function getSummoner_name(){
     let tempChar = "";
     inputName = document.getElementById("inputName").value;
@@ -147,4 +155,35 @@ function rankConvert(current_rank_list, current_score_list){
         case "I":
             return current_score_list - 0;
     }
+}
+
+function suffleTeam(){
+    console.log("score_list : "+score_list);
+    let teamA = score_list[0] + score_list[1] + score_list[2] + score_list[3] + score_list[4];
+    let teamB = score_list[5] + score_list[6] + score_list[7] + score_list[8] + score_list[9];
+    while(true){
+        shuffleArray(score_list);
+        console.log("score_list : "+score_list);
+        teamA = score_list[0] + score_list[1] + score_list[2] + score_list[3] + score_list[4];
+        teamB = score_list[5] + score_list[6] + score_list[7] + score_list[8] + score_list[9];
+        if(teamA > teamB){
+            if((teamA - teamB) > 5){
+                continue
+            }
+            else{
+                console.log("teamA : ",teamA," teamB : ",teamB);
+                break
+            }
+        }
+        else{
+            if((teamB - teamA) > 5){
+                continue
+            }
+            else{
+                console.log("teamA : ",teamA," teamB : ",teamB);
+                break
+            }
+        }
+    }
+    console.log(score_list);
 }
