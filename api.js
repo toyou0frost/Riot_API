@@ -6,6 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
+const API_KEY = "RGAPI-e0e14747-842d-4b25-af79-aa04990a62dd";
 
 function shuffleArray(score_list){
     for(let i = 0; i < 10; i++){
@@ -32,7 +33,7 @@ function getSummoner_name(){
 }
 
 function getSummoner_id(summoner_name){
-    fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner_name}?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d`)
+    fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner_name}?api_key=${API_KEY}`)
         .then((res) => {
             console.log(res);
             return res.json();
@@ -48,7 +49,7 @@ function getSummoner_id(summoner_name){
 }
 
 function getSummoner_tier(summoner_id, summoner_name){
-    fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=RGAPI-eda3e77d-ddca-4826-92a4-2e1e01c70c0d`)
+    fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=${API_KEY}`)
         .then((res) => { 
             console.log(res);  
             return res.json();
