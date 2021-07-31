@@ -112,6 +112,7 @@ function getSummoner_tier(summoner_id, summoner_name){
             }
             let table_class = `sec_2_table_td_${count}`
             document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[count - 1];
+            // document.getElementById("inputName").value = "";
             convertScore();
         }).catch(err => {
             console.log('Tier_API Error', err);
@@ -194,28 +195,72 @@ function suffleTeam(){
         console.log("팀원이 부족합니다");
         return 
     }
+    let sort_name = scoreListSort(score_list);
+    let teamA_sort;
+    let teamB_sort;
     let teamA = score_list[0].score + score_list[1].score + score_list[2].score + score_list[3].score + score_list[4].score;
     let teamB = score_list[5].score + score_list[6].score + score_list[7].score + score_list[8].score + score_list[9].score;
+    let teamA_name = new Array(5);
+    let teamB_name = new Array(5);
+    let overlapCheck = 0;
+    let overlapCheckbool= false;
     while(true){
         shuffleArray(score_list);
         teamA = score_list[0].score + score_list[1].score + score_list[2].score + score_list[3].score + score_list[4].score;
         teamB = score_list[5].score + score_list[6].score + score_list[7].score + score_list[8].score + score_list[9].score;
-        if(teamA > teamB){
-            if((teamA - teamB) > tiergap){
-                continue
+        for(let i = 0; i < 10; i++){
+            if(i < 5){
+                teamA_name[i] = score_list[i].name;
             }
             else{
-                console.log("teamA : ",teamA," teamB : ",teamB);
-                break
+                teamB_name[i] = score_list[i].name;
             }
         }
-        else{
-            if((teamB - teamA) > tiergap){
-                continue
+        sort_name = scoreListSort(score_list);
+        teamA_sort = teamSort(teamA_name);
+        teamB_sort = teamSort(teamB_name);
+        for(let i = 0; i < 2; i++){
+            for(let j = 0; j < 2; j++){
+                overlapCheck = 0;
+                for(let k = 0; k < 5; k++){
+                    if(j === 0){
+                        if(sort_name[i][k] === teamA_sort[k]){
+                            overlapCheck++;
+                        }
+                    }
+                    else{
+                        if(sort_name[i][k] === teamB_sort[k]){
+                            overlapCheck++
+                            
+                        }
+                    }
+                    if(overlapCheck === 5){
+                        overlapCheckbool = false;
+                    }
+                    else{
+                        overlapCheckbool = true;
+                    }
+                }
+            }
+        }
+        if(overlapCheckbool){
+            if(teamA > teamB){
+                if((teamA - teamB) > tiergap){
+                    continue
+                }
+                else{
+                    console.log("teamA : ",teamA," teamB : ",teamB);
+                    break
+                }
             }
             else{
-                console.log("teamA : ",teamA," teamB : ",teamB);
-                break
+                if((teamB - teamA) > tiergap){
+                    continue
+                }
+                else{
+                    console.log("teamA : ",teamA," teamB : ",teamB);
+                    break
+                }
             }
         }
     }
@@ -284,7 +329,7 @@ function guessTierDivide(guessTier, count){
                 rank_list[count] = "II";
                 break
             case "3":
-                rank_list[count] = "II";
+                rank_list[count] = "III";
                 break
             case "4":
                 rank_list[count] = "IV";
@@ -306,7 +351,29 @@ onload = () => {
         if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("inputNameBtn").click();
+            document.getElementById("inputName").value = ""; // 디버깅용
         }
     });
     }
+}
+
+function scoreListSort(score_list_sort){
+    let index0_4 = new Array(5);
+    let index5_9 = new Array(5);
+
+    for(let i = 0; i < 10; i++){
+        if(i < 5){
+            index0_4[i] = score_list_sort[i].name;
+        }
+        else{
+            index5_9[i] = score_list_sort[i].name;
+        }
+    }
+    index0_4 = index0_4.sort();
+    index5_9 = index5_9.sort();
+    return [index0_4, index5_9];
+}
+
+function teamSort(team){
+    return team.sort(); 
 }
