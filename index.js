@@ -411,3 +411,26 @@ function scoreSummonerSynchronize(){
         }
     }
 }
+
+function showOption(num){ 
+    let classname = `sec_2_table_td_${num}`;
+    let td_value = document.getElementsByClassName(classname)[0].innerHTML;
+    let td = document.getElementsByClassName(classname)[0];
+    let tdCheck;
+    for(let i = 1; i <= 10; i++){
+        if(i == num){
+            continue
+        }
+        classname = `sec_2_table_td_${i}`;
+        tdCheck = document.getElementsByClassName(classname)[0];
+        if(tdCheck.style.backgroundColor === "rgb(89, 89, 89)"){
+            tdCheck.style.backgroundColor = "white";
+        }
+    }
+    if(td.style.backgroundColor === "rgb(89, 89, 89)"){
+        td.style.backgroundColor = "white";    
+    }
+    else{
+        td.style.backgroundColor = "#595959";
+    }
+}

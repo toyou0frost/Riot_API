@@ -83,6 +83,7 @@ background : #FDF6F0
     padding-bottom: 0px;
     border-spacing: 0;
     border-collapse: collapse;
+    user-select: none;
 }
 
 .sec_2 > table > tbody > tr > td > *{
@@ -94,4 +95,14 @@ background : #FDF6F0
     background-color: white;
     padding: 10px;
     border: 1px solid;
+    cursor: pointer;
+}
+
+.deleteBtn, .modifyBtn{
+    background-color: white;
+    border: 1px solid #ccc;
+    height: 100%;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
 }
