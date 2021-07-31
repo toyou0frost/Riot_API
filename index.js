@@ -7,6 +7,12 @@ let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
 const API_KEY = "RGAPI-e0e14747-842d-4b25-af79-aa04990a62dd";
+let tiergap = 5;
+let guessTier = "";
+
+for(let i = 0; i < 10; i++){
+    score_list[i] = {name: "", score: 0}; 
+}
 
 function shuffleArray(score_list){
     for(let i = 0; i < 10; i++){
@@ -49,6 +55,7 @@ function getSummoner_id(summoner_name){
 }
 
 function getSummoner_tier(summoner_id, summoner_name){
+    let inputCheck = false;
     fetch(`https://cors-anywhere.herokuapp.com/https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=${API_KEY}`)
         .then((res) => { 
             console.log(res);  
@@ -61,24 +68,47 @@ function getSummoner_tier(summoner_id, summoner_name){
                     name_list[count] = summoner_name;
                     tier_list[count] = data[0].tier;
                     rank_list[count] = data[0].rank;
+                    score_list[count].name = summoner_name;
                 }
                 else if(data[1] === undefined){
                     summoner_list[count] = summoner_name + " " + data[0].tier + " " + data[0].rank + " 자";
                     name_list[count] = summoner_name;
                     tier_list[count] = data[0].tier;
                     rank_list[count] = data[0].rank;
+                    score_list[count].name = summoner_name;
                 }
                 else{
                     summoner_list[count] = summoner_name + " " + data[1].tier + " " + data[1].rank + " 솔";
                     name_list[count] = summoner_name;
                     tier_list[count] = data[1].tier;
                     rank_list[count] = data[1].rank;
+                    score_list[count].name = summoner_name;
                 }
                 console.log(summoner_list);
                 count++;
             }
             else if(data[0] === undefined){
                 console.log("undefined Tier");
+                while(true){
+                    guessTier = prompt("예상 티어를 적어주세요. EX) 골드 4 띄어쓰기 필수!!");
+                    if(guessTier === "0"){
+                        inputCheck = false;
+                        break
+                    }
+                    guessTierDivide(guessTier, count);
+                    if(guessTierDivide(guessTier, count)){
+                        inputCheck = true;
+                        break
+                    }
+                    alert("다시 정확하게 입력해 주세요.\n소환사명을 다시 입력하고 싶다면 0을 입력해 주세요.");
+                }
+                if(inputCheck){
+                    name_list[count] = summoner_name;
+                    score_list[count].name = summoner_name;
+                    summoner_list[count] = summoner_name + " " + tier_list[count] + " " + rank_list[count] + " 언";
+                    count++;
+                    console.log(summoner_list);
+                }
             }
             document.getElementById("tempdiv").innerHTML = summoner_list;
             convertScore();
@@ -108,37 +138,37 @@ function convertScore(){
     for(let i = 0; i < 10; i++){
         switch(tier_list[i]){
             case "IRON": 
-                score_list[i] = 4;
-                score_list[i] = rankConvert(rank_list[i], score_list[i]);
+                score_list[i].score = 4;
+                score_list[i].score = rankConvert(rank_list[i], score_list[i].score);
                 break;
             case "BRONZE":
-                score_list[i] = 8;
-                score_list[i] = rankConvert(rank_list[i], score_list[i]);
+                score_list[i].score = 8;
+                score_list[i].score = rankConvert(rank_list[i], score_list[i].score);
                 break;
             case "SILVER":
-                score_list[i] = 12;
-                score_list[i] = rankConvert(rank_list[i], score_list[i]);
+                score_list[i].score = 12;
+                score_list[i].score = rankConvert(rank_list[i], score_list[i].score);
                 break;
             case "GOLD":
-                score_list[i] = 16;
-                score_list[i] = rankConvert(rank_list[i], score_list[i]);
+                score_list[i].score = 16;
+                score_list[i].score = rankConvert(rank_list[i], score_list[i].score);
                 break;
             case "PLATINUM":
-                score_list[i] = 20;
-                score_list[i] = rankConvert(rank_list[i], score_list[i]);
+                score_list[i].score = 20;
+                score_list[i].score = rankConvert(rank_list[i], score_list[i].score);
                 break;
             case "DIAMOND":
-                score_list[i] = 24;
-                score_list[i] = rankConvert(rank_list[i], score_list[i]);
+                score_list[i].score = 24;
+                score_list[i].score = rankConvert(rank_list[i], score_list[i].score);
                 break;
             case "MASTER":
-                score_list[i] = 25;
+                score_list[i].score = 25;
                 break;
             case "GRANDMASTER":
-                score_list[i] = 26;
+                score_list[i].score = 26;
                 break;
             case "CHALLENGER":
-                score_list[i] = 27;
+                score_list[i].score = 27;
                 break;
         }
     }
@@ -159,16 +189,18 @@ function rankConvert(current_rank_list, current_score_list){
 }
 
 function suffleTeam(){
-    console.log("score_list : "+score_list);
-    let teamA = score_list[0] + score_list[1] + score_list[2] + score_list[3] + score_list[4];
-    let teamB = score_list[5] + score_list[6] + score_list[7] + score_list[8] + score_list[9];
+    if(score_list[9].name === ""){
+        console.log("팀원이 부족합니다");
+        return 
+    }
+    let teamA = score_list[0].score + score_list[1].score + score_list[2].score + score_list[3].score + score_list[4].score;
+    let teamB = score_list[5].score + score_list[6].score + score_list[7].score + score_list[8].score + score_list[9].score;
     while(true){
         shuffleArray(score_list);
-        console.log("score_list : "+score_list);
-        teamA = score_list[0] + score_list[1] + score_list[2] + score_list[3] + score_list[4];
-        teamB = score_list[5] + score_list[6] + score_list[7] + score_list[8] + score_list[9];
+        teamA = score_list[0].score + score_list[1].score + score_list[2].score + score_list[3].score + score_list[4].score;
+        teamB = score_list[5].score + score_list[6].score + score_list[7].score + score_list[8].score + score_list[9].score;
         if(teamA > teamB){
-            if((teamA - teamB) > 5){
+            if((teamA - teamB) > tiergap){
                 continue
             }
             else{
@@ -177,7 +209,7 @@ function suffleTeam(){
             }
         }
         else{
-            if((teamB - teamA) > 5){
+            if((teamB - teamA) > tiergap){
                 continue
             }
             else{
@@ -187,4 +219,78 @@ function suffleTeam(){
         }
     }
     console.log(score_list);
+}
+
+function inputTierGap(){
+    tiergap = document.getElementById("tierWeights").value;
+    if(tiergap < 1){
+        tiergap = 5;
+        return
+    }
+}
+
+function guessTierDivide(guessTier, count){
+    let quessTier = guessTier.split(" ")[0];
+    let quessRank = guessTier.split(" ")[1];
+    let tierCheck = false;
+
+    switch(quessTier){
+        case "아이언":
+            tierCheck = true;
+            tier_list[count] = "IRON";
+            break
+        case "브론즈":
+            tierCheck = true;
+            tier_list[count] = "BRONZE";
+            break
+        case "실버":
+            tierCheck = true;
+            tier_list[count] = "SILVER";
+            break
+        case "골드":
+            tierCheck = true;
+            tier_list[count] = "GOLD";
+            break
+        case "플레티넘":
+            tierCheck = true;
+            tier_list[count] = "PLATINUM";
+            break
+        case "다이아":
+            tierCheck = true;
+            tier_list[count] = "DIAMOND";
+            break
+        case "마스터":
+            tierCheck = false;
+            tier_list[count] = "MASTER";
+            break
+        case "그랜드마스터":
+            tierCheck = false;
+            tier_list[count] = "GRANDMASTER";
+            break
+        case "첼린저":
+            tierCheck = false;
+            tier_list[count] = "CHALLENGER";
+            break
+        default:
+            return false
+    }
+    if(tierCheck){    
+        switch(quessRank){
+            case "1":
+                rank_list[count] = "I";
+                break
+            case "2":
+                rank_list[count] = "II";
+                break
+            case "3":
+                rank_list[count] = "II";
+                break
+            case "4":
+                rank_list[count] = "IV";
+                break
+            default:
+                return false
+        }
+    }
+    return true
 }

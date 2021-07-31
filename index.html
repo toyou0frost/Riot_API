@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="api.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
     <input type="text" placeholder="소환사명" id="inputName">
     <input type="button" onclick="getSummoner_name()" value="검색">
     <input type="button" onclick="suffleTeam()" value="팀 섞기">
+    <input type="text" placeholder="팀 격차" id="tierWeights">
+    <input type="button" onclick="inputTierGap()" value="팀 격차 설정">
     <div id="tempdiv"></div>
 </body>
 </html>
