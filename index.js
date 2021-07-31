@@ -6,7 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
-const API_KEY = "RGAPI-e0e14747-842d-4b25-af79-aa04990a62dd";
+const API_KEY = "RGAPI-524c914e-2306-481c-9078-c300c41343da";
 let tiergap = 5;
 let guessTier = "";
 
@@ -90,7 +90,7 @@ function getSummoner_tier(summoner_id, summoner_name){
             else if(data[0] === undefined){
                 console.log("undefined Tier");
                 while(true){
-                    guessTier = prompt("예상 티어를 적어주세요. EX) 골드 4 띄어쓰기 필수!!");
+                    guessTier = prompt("예상 티어를 적어주세요. EX) 다이아몬드 1 띄어쓰기 필수!!");
                     if(guessTier === "0"){
                         inputCheck = false;
                         break
@@ -110,7 +110,8 @@ function getSummoner_tier(summoner_id, summoner_name){
                     console.log(summoner_list);
                 }
             }
-            document.getElementById("tempdiv").innerHTML = summoner_list;
+            let table_class = `sec_2_table_td_${count}`
+            document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[count - 1];
             convertScore();
         }).catch(err => {
             console.log('Tier_API Error', err);
@@ -255,7 +256,7 @@ function guessTierDivide(guessTier, count){
             tierCheck = true;
             tier_list[count] = "PLATINUM";
             break
-        case "다이아":
+        case "다이아몬드":
             tierCheck = true;
             tier_list[count] = "DIAMOND";
             break
@@ -293,4 +294,19 @@ function guessTierDivide(guessTier, count){
         }
     }
     return true
+}
+onload = () => {
+    input = document.getElementById("inputName");
+    if(input === null){
+        return;
+    }
+    else{
+        input.focus();
+        input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("inputNameBtn").click();
+        }
+    });
+    }
 }

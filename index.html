@@ -1,18 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-    <input type="text" placeholder="소환사명" id="inputName">
-    <input type="button" onclick="getSummoner_name()" value="검색">
-    <input type="button" onclick="suffleTeam()" value="팀 섞기">
-    <input type="text" placeholder="팀 격차" id="tierWeights">
-    <input type="button" onclick="inputTierGap()" value="팀 격차 설정">
-    <div id="tempdiv"></div>
+    <div id="body_div">
+        <header>
+            <div class="header_div">
+                <h1>랜덤 팀 짜기(가제)</h1>
+            </div>
+        </header>
+        <article>
+            <section class="sec_1">
+                <input type="text" placeholder="소환사명" id="inputName" class="input_text">
+                <input type="button" onclick="getSummoner_name()" value="검색" class="input_btn" id="inputNameBtn">
+            </section>
+            <section class="sec_2">
+                <table>
+                    <tbody>
+                        <tr class="sec_2_table_tr_1">
+                            <td class="sec_2_table_td_1"></td>
+                            <td class="sec_2_table_td_2"></td>
+                        </tr>
+                        <tr class="sec_2_table_tr_2">
+                            <td class="sec_2_table_td_3"></td>
+                            <td class="sec_2_table_td_4"></td>
+                        </tr>
+                        <tr class="sec_2_table_tr_3">
+                            <td class="sec_2_table_td_5"></td>
+                            <td class="sec_2_table_td_6"></td>
+                        </tr>
+                        <tr class="sec_2_table_tr_4">
+                            <td class="sec_2_table_td_7"></td>
+                            <td class="sec_2_table_td_8"></td>
+                        </tr>
+                        <tr class="sec_2_table_tr_5">
+                            <td class="sec_2_table_td_9"></td>
+                            <td class="sec_2_table_td_10"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <input type="button" onclick="suffleTeam()" value="팀 섞기" class="input_btn">
+        </article>
+    </div>
 </body>
+
 </html>
