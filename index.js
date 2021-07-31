@@ -265,6 +265,8 @@ function suffleTeam(){
         }
     }
     console.log(score_list);
+    scoreSummonerSynchronize();
+    showTeam();
 }
 
 function inputTierGap(){
@@ -376,4 +378,36 @@ function scoreListSort(score_list_sort){
 
 function teamSort(team){
     return team.sort(); 
+}
+
+function showTeam(){
+    for(let i = 0; i < 10; i++){
+        let table_class = `sec_2_table_td_${i + 1}`
+        document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[i];
+    }
+}
+
+function scoreSummonerSynchronize(){
+    let namelegth = 0;
+    let namecheck = false;
+    let tmp = "";
+    for(let i = 0; i < 10; i++){
+        namelegth = score_list[i].name.length;
+        for(let j = 0; j < 10; j++){
+            for(let k = 0; k < namelegth; k++){
+                if(summoner_list[j][k] === score_list[i].name[k]){
+                    namecheck = true;
+                }
+                else{
+                    namecheck = false;
+                    break;
+                }
+            }
+            if(namecheck){
+                tmp = summoner_list[i];
+                summoner_list[i] = summoner_list[j];
+                summoner_list[j] = tmp;
+            }
+        }
+    }
 }
