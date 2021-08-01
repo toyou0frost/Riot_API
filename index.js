@@ -6,7 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
-const API_KEY = "RGAPI-be70fa99-e572-479c-b37a-dbe7c831c715";
+const API_KEY = "RGAPI-8cb54237-a60e-4399-bfcc-915e82861e2d";
 let tiergap = 5;
 let guessTier = "";
 
@@ -538,7 +538,11 @@ function deleteSummoner(){
 }
 
 function modifyTier(){
-    let inputValue = getInputValue();    
+    let inputValue = getInputValue();   
+    if(inputValue === undefined){
+        console.log("소환사를 선택해 주십시오.");
+        return
+    }
     let guessTier = "";
     let inputCheck = false;
     let inputValue_array = inputValue.split(" ");
@@ -547,23 +551,22 @@ function modifyTier(){
     for(let i = 0; i < 10; i++){
         if(summoner_list[i] === inputValue){                
             while(true){
-                guessTier = prompt("예상 티어를 적어주세요. EX) 다이아몬드 1 띄어쓰기 필수!!");
-                if(guessTier === "0"){
-                    inputCheck = false;
-                    break
-                }
+                guessTier = document.getElementsByClassName("modifyInput")[0].value;
                 tier_rank = guessTierDivide(guessTier, i, true);
+                console.log(tier_rank);
                 guessTierDivide(guessTier, i);
                 if(guessTierDivide(guessTier, i, true) && guessTierDivide(guessTier, i)){
                     inputCheck = true;
                     break
                 }
-                alert("다시 정확하게 입력해 주세요.\n수정을 취소하시려면 0을 입력해 주세요.");
+                alert("다시 정확하게 입력해 주세요. EX) 다이아몬드 4");
+                return
             }
-            if(!inputCheck){
+            if(inputCheck){
                 for(let i = 1; i < 3; i++){
-                    inputValue_array[i] = tier_rank[i - 1];
+                    inputValue_array[i] = tier_rank[i - 1] + " ";
                 }
+                inputValue_array[0] += " ";
                 inputValue = "";
                 for(let i = 0; i < 4; i++){
                     inputValue += inputValue_array[i];
