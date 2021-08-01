@@ -6,7 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
-const API_KEY = "RGAPI-524c914e-2306-481c-9078-c300c41343da";
+const API_KEY = "RGAPI-be70fa99-e572-479c-b37a-dbe7c831c715";
 let tiergap = 5;
 let guessTier = "";
 
@@ -277,10 +277,77 @@ function inputTierGap(){
     }
 }
 
-function guessTierDivide(guessTier, count){
+function guessTierDivide(guessTier, count, modiCheck = false){
     let quessTier = guessTier.split(" ")[0];
     let quessRank = guessTier.split(" ")[1];
     let tierCheck = false;
+
+    if(modiCheck){
+        let tier = "";
+        let rank = "";
+        switch(quessTier){
+            case "아이언":
+                tierCheck = true;
+                tier = "IRON";
+                break
+            case "브론즈":
+                tierCheck = true;
+                tier = "BRONZE";
+                break
+            case "실버":
+                tierCheck = true;
+                tier = "SILVER";
+                break
+            case "골드":
+                tierCheck = true;
+                tier = "GOLD";
+                break
+            case "플레티넘":
+                tierCheck = true;
+                tier = "PLATINUM";
+                break
+            case "다이아몬드":
+                tierCheck = true;
+                tier = "DIAMOND";
+                break
+            case "마스터":
+                tierCheck = false;
+                tier = "MASTER";
+                break
+            case "그랜드마스터":
+                tierCheck = false;
+                tier = "GRANDMASTER";
+                break
+            case "첼린저":
+                tierCheck = false;
+                tier = "CHALLENGER";
+                break
+            default:
+                return false
+        }
+        if(tierCheck){    
+            switch(quessRank){
+                case "1":
+                    rank = "I";
+                    break
+                case "2":
+                    rank = "II";
+                    break
+                case "3":
+                    rank = "III";
+                    break
+                case "4":
+                    rank = "IV";
+                    break
+                default:
+                    return false
+            }
+        }
+        else{
+            rank = "I";
+        }
+        return [tier, rank]
+    }
 
     switch(quessTier){
         case "아이언":
@@ -382,6 +449,9 @@ function teamSort(team){
 
 function showTeam(){
     for(let i = 0; i < 10; i++){
+        if(summoner_list[i] === undefined){
+            break
+        }
         let table_class = `sec_2_table_td_${i + 1}`
         document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[i];
     }
@@ -414,7 +484,6 @@ function scoreSummonerSynchronize(){
 
 function showOption(num){ 
     let classname = `sec_2_table_td_${num}`;
-    let td_value = document.getElementsByClassName(classname)[0].innerHTML;
     let td = document.getElementsByClassName(classname)[0];
     let tdCheck;
     for(let i = 1; i <= 10; i++){
@@ -432,5 +501,80 @@ function showOption(num){
     }
     else{
         td.style.backgroundColor = "#595959";
+    }
+}
+
+function getInputValue(){
+    let classname;
+    let td;
+    let inputValue = "";
+    for(let i = 1; i <= 10; i++){
+        classname = `sec_2_table_td_${i}`;
+        td = document.getElementsByClassName(classname)[0];
+        if(td.style.backgroundColor === "rgb(89, 89, 89)"){
+            inputValue = td.innerHTML;
+            return inputValue
+        }
+    }
+}
+
+function deleteSummoner(){
+    let inputValue = getInputValue();
+
+    if(inputValue === ""){
+        console.log("삭제하실 소환사를 선택하세요.");
+        return
+    }
+    count--;
+    for(let i = 0; i < 10; i++){
+        if(summoner_list[i] === inputValue){
+            summoner_list[i] = "";
+            score_list[i] = {name : "", score: 0};
+            name_list[i] = "";
+            showTeam();
+            return
+        }
+    }
+}
+
+function modifyTier(){
+    let inputValue = getInputValue();    
+    let guessTier = "";
+    let inputCheck = false;
+    let inputValue_array = inputValue.split(" ");
+    let tier_rank = new Array(2);
+    inputValue_array[2]
+    for(let i = 0; i < 10; i++){
+        if(summoner_list[i] === inputValue){                
+            while(true){
+                guessTier = prompt("예상 티어를 적어주세요. EX) 다이아몬드 1 띄어쓰기 필수!!");
+                if(guessTier === "0"){
+                    inputCheck = false;
+                    break
+                }
+                tier_rank = guessTierDivide(guessTier, i, true);
+                guessTierDivide(guessTier, i);
+                if(guessTierDivide(guessTier, i, true) && guessTierDivide(guessTier, i)){
+                    inputCheck = true;
+                    break
+                }
+                alert("다시 정확하게 입력해 주세요.\n수정을 취소하시려면 0을 입력해 주세요.");
+            }
+            if(!inputCheck){
+                for(let i = 1; i < 3; i++){
+                    inputValue_array[i] = tier_rank[i - 1];
+                }
+                inputValue = "";
+                for(let i = 0; i < 4; i++){
+                    inputValue += inputValue_array[i];
+                }
+                summoner_list[i] = inputValue;
+                score_list[i].score = 0;
+                convertScore();
+                showTeam();
+                console.log(summoner_list);
+            }
+            return
+        }
     }
 }
