@@ -6,7 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
-const API_KEY = "RGAPI-be70fa99-e572-479c-b37a-dbe7c831c715";
+const API_KEY = "RGAPI-af3778a7-f377-4b0b-af0c-0c5dc21f796b";
 let tiergap = 5;
 let guessTier = "";
 
@@ -110,7 +110,7 @@ function getSummoner_tier(summoner_id, summoner_name){
                     console.log(summoner_list);
                 }
             }
-            let table_class = `sec_2_table_td_${count}`
+            let table_class = `sec_3_table_td_${count}`
             document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[count - 1];
             // document.getElementById("inputName").value = "";
             convertScore();
@@ -452,7 +452,7 @@ function showTeam(){
         if(summoner_list[i] === undefined){
             break
         }
-        let table_class = `sec_2_table_td_${i + 1}`
+        let table_class = `sec_3_table_td_${i + 1}`
         document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[i];
     }
 }
@@ -483,14 +483,14 @@ function scoreSummonerSynchronize(){
 }
 
 function showOption(num){ 
-    let classname = `sec_2_table_td_${num}`;
+    let classname = `sec_3_table_td_${num}`;
     let td = document.getElementsByClassName(classname)[0];
     let tdCheck;
     for(let i = 1; i <= 10; i++){
         if(i == num){
             continue
         }
-        classname = `sec_2_table_td_${i}`;
+        classname = `sec_3_table_td_${i}`;
         tdCheck = document.getElementsByClassName(classname)[0];
         if(tdCheck.style.backgroundColor === "rgb(89, 89, 89)"){
             tdCheck.style.backgroundColor = "white";
@@ -509,7 +509,7 @@ function getInputValue(){
     let td;
     let inputValue = "";
     for(let i = 1; i <= 10; i++){
-        classname = `sec_2_table_td_${i}`;
+        classname = `sec_3_table_td_${i}`;
         td = document.getElementsByClassName(classname)[0];
         if(td.style.backgroundColor === "rgb(89, 89, 89)"){
             inputValue = td.innerHTML;

@@ -25,8 +25,8 @@ background : #FDF6F0
 
 #body_div{
     text-align: center;
-    width: 1250px;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     margin: 0 auto;
     font-family: 'Jua', sans-serif;
     border-left: 2px solid #ccc;
@@ -38,7 +38,7 @@ background : #FDF6F0
 }
 
 .header_div > h1{
-    background-color: #FCD8D4;
+    background-color: #70ca83;
 }
 
 .sec_1{
@@ -57,26 +57,37 @@ background : #FDF6F0
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: #E6DDC6;
-}
-
-.sec_1 > .input_btn{
-    padding: 30px;
-    border: 1px solid #ccc;
-    background-color: #C2B8A3;
-    border-radius: 10px;
+    /* background-color: transparent;
+    border-color: #0dcaf0; */
 }
 
 .input_btn{
     cursor: pointer;
 }
 
+.input_text{
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+input:focus{
+    outline: none;
+}
+
 .sec_2{
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.sec_3{
     display: flex;
     justify-content: center;
 }
 
-.sec_2 > table{
+.sec_3 > table{
     margin: 30px;
     padding: 30px;
     border: none;
@@ -86,23 +97,31 @@ background : #FDF6F0
     user-select: none;
 }
 
-.sec_2 > table > tbody > tr > td > *{
+.sec_3 > table > tbody > tr > td > *{
     width: 100%;
     padding: 5px;
 }
 
-.sec_2 > table > tbody > tr > *{
+.sec_3 > table > tbody > tr > *{
     background-color: white;
     padding: 10px;
     border: 1px solid;
     cursor: pointer;
 }
 
-.deleteBtn, .modifyBtn{
-    background-color: white;
-    border: 1px solid #ccc;
+.btn.btn-success{
     height: 100%;
     padding: 20px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
+}
+
+.sec_4{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn.btn-warning{
+    margin: 5px;
 }

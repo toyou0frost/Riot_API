@@ -8,6 +8,7 @@
     <title>Document</title>
     <script src="index.js"></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 
 <body>
@@ -20,11 +21,15 @@
         <article>
             <section class="sec_1">
                 <input type="text" placeholder="소환사명" id="inputName" class="input_text">
-                <input type="button" onclick="getSummoner_name()" value="검색" class="input_btn" id="inputNameBtn">
+                <input type="button" onclick="getSummoner_name()" value="검색" class="btn btn-secondary" id="inputNameBtn">
             </section>
-            <input type="button" value="삭제" class="deleteBtn" onclick="deleteSummoner()">
-            <input type="button" value="티어조정" class="modifyBtn" onclick="modifyTier()">
+
             <section class="sec_2">
+                <input type="button" value="삭제" class="btn btn-outline-success" id="button" onclick="deleteSummoner()">
+                <input type="button" value="티어조정" class="btn btn-outline-success" id="button" onclick="modifyTier()">
+            </section>
+
+            <section class="sec_3">
                 <table>
                     <thead>
                         <tr>
@@ -33,34 +38,42 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="sec_2_table_tr_1">
-                            <td class="sec_2_table_td_1" onclick="showOption('1')"></td>
-                            <td class="sec_2_table_td_6" onclick="showOption('6')"></td>
+                        <tr class="sec_3_table_tr_1">
+                            <td class="sec_3_table_td_1" onclick="showOption('1')"></td>
+                            <td class="sec_3_table_td_6" onclick="showOption('6')"></td>
                         </tr>
-                        <tr class="sec_2_table_tr_2">
-                            <td class="sec_2_table_td_2" onclick="showOption('2')"></td>
-                            <td class="sec_2_table_td_7" onclick="showOption('7')"></td>
+                        <tr class="sec_3_table_tr_2">
+                            <td class="sec_3_table_td_2" onclick="showOption('2')"></td>
+                            <td class="sec_3_table_td_7" onclick="showOption('7')"></td>
                         </tr>
-                        <tr class="sec_2_table_tr_3">
-                            <td class="sec_2_table_td_3" onclick="showOption('3')"></td>
-                            <td class="sec_2_table_td_8" onclick="showOption('8')"></td>
+                        <tr class="sec_3_table_tr_3">
+                            <td class="sec_3_table_td_3" onclick="showOption('3')"></td>
+                            <td class="sec_3_table_td_8" onclick="showOption('8')"></td>
                         </tr>
-                        <tr class="sec_2_table_tr_4">
-                            <td class="sec_2_table_td_4" onclick="showOption('4')"></td>
-                            <td class="sec_2_table_td_9" onclick="showOption('9')"></td>
+                        <tr class="sec_3_table_tr_4">
+                            <td class="sec_3_table_td_4" onclick="showOption('4')"></td>
+                            <td class="sec_3_table_td_9" onclick="showOption('9')"></td>
                         </tr>
-                        <tr class="sec_2_table_tr_5">
-                            <td class="sec_2_table_td_5" onclick="showOption('5')"></td>
-                            <td class="sec_2_table_td_10" onclick="showOption('10')"></td>
+                        <tr class="sec_3_table_tr_5">
+                            <td class="sec_3_table_td_5" onclick="showOption('5')"></td>
+                            <td class="sec_3_table_td_10" onclick="showOption('10')"></td>
                         </tr>
                     </tbody>
                 </table>
             </section>
-            <input type="button" onclick="suffleTeam()" value="팀 섞기" class="input_btn">
-            <input type="text" placeholder="팀 격차" id="tierWeights" class="input_text">
-            <input type="button" onclick="inputTierGap()" value="팀 격차 설정" class="input_btn">
+
+            <section class="sec_4">
+                <input type="button" onclick="suffleTeam()" value="팀 섞기" class="btn btn-outline-secondary">
+            </section>
+
+            <section class="sec_5">
+                <input type="text" placeholder="팀 격차" id="tierWeights" class="input_text">
+                <input type="button" onclick="inputTierGap()" value="팀 격차 설정" class="btn btn-secondary">
+            </section>
+
         </article>
     </div>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 
 </html>
