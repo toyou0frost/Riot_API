@@ -21,6 +21,7 @@ background : #FDF6F0
     padding: 0;
     box-sizing: border-box;
     background-color: #FDF6F0;
+    font-family: 'Jua', sans-serif;
 }
 
 #body_div{
@@ -28,17 +29,21 @@ background : #FDF6F0
     width: 100vw;
     height: 100vh;
     margin: 0 auto;
-    font-family: 'Jua', sans-serif;
     border-left: 2px solid #ccc;
     border-right: 2px solid #ccc;
 }
 
-.header_div{
-    margin-bottom: 50px;
+article{
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.art{
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .header_div > h1{
-    background-color: #70ca83;
+    background-color: #72b2e4;
 }
 
 .sec_1{
@@ -53,23 +58,19 @@ background : #FDF6F0
 }
 
 .sec_1 > .input_text{
+    height: 80px;
     font-size: 1.3em;
-    padding: 30px;
+    padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 10px;
-    /* background-color: transparent;
-    border-color: #0dcaf0; */
+    border-radius: 5px;
+}
+
+.sec_1 > .btn-g{
+    height: 80px;
 }
 
 .input_btn{
     cursor: pointer;
-}
-
-.input_text{
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 5px;
 }
 
 input:focus{
@@ -105,15 +106,8 @@ input:focus{
 .sec_3 > table > tbody > tr > *{
     background-color: white;
     padding: 10px;
-    border: 1px solid;
+    border: 1px solid black;
     cursor: pointer;
-}
-
-.btn.btn-success{
-    height: 100%;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
 }
 
 .sec_4{
@@ -122,6 +116,44 @@ input:focus{
     margin-bottom: 20px;
 }
 
-.btn.btn-warning{
-    margin: 5px;
+.sec_5{
+    margin-top: 40px;
+}
+
+.sec_5 > .input_text{
+    padding: 5px;
+    height: 40px;
+    font-size: 1em;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* margin: 5px; */
+}
+
+.sec_5 > .btn-b{
+    text-align: center;
+    height: 40px;
+}
+
+.btn-b{
+    background-color: #72b2e4;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn-g{
+    background-color: #c8ced3;
+    padding: 8px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+#c_r{
+    color: red;
+}
+
+#c_b{
+    color: blue;
 }

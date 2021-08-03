@@ -8,7 +8,6 @@
     <title>Document</title>
     <script src="index.js"></script>
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 
 <body>
@@ -18,23 +17,23 @@
                 <h1>랜덤 팀 짜기(가제)</h1>
             </div>
         </header>
-        <article>
+        <article class="art">
             <section class="sec_1">
                 <input type="text" placeholder="소환사명" id="inputName" class="input_text">
-                <input type="button" onclick="getSummoner_name()" value="검색" class="btn btn-secondary" id="inputNameBtn">
+                <input type="button" onclick="getSummoner_name()" value="검색" class="btn-b" id="inputNameBtn">
             </section>
 
             <section class="sec_2">
-                <input type="button" value="삭제" class="btn btn-outline-success" id="button" onclick="deleteSummoner()">
-                <input type="button" value="티어조정" class="btn btn-outline-success" id="button" onclick="modifyTier()">
+                <input type="button" value="삭제" class="btn-g" id="button" onclick="deleteSummoner()">
+                <input type="button" value="티어조정" class="btn-g" id="button" onclick="modifyTier()">
             </section>
 
             <section class="sec_3">
                 <table>
                     <thead>
                         <tr>
-                            <td>red</td>
-                            <td>blue</td>
+                            <td id="c_r">red</td>
+                            <td id="c_b">blue</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,17 +62,16 @@
             </section>
 
             <section class="sec_4">
-                <input type="button" onclick="suffleTeam()" value="팀 섞기" class="btn btn-outline-secondary">
+                <input type="button" onclick="suffleTeam()" value="팀 섞기" class="btn-g">
             </section>
 
             <section class="sec_5">
                 <input type="text" placeholder="팀 격차" id="tierWeights" class="input_text">
-                <input type="button" onclick="inputTierGap()" value="팀 격차 설정" class="btn btn-secondary">
+                <input type="button" onclick="inputTierGap()" value="팀 격차 설정" class="btn-b">
             </section>
 
         </article>
     </div>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 
 </html>
