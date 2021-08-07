@@ -6,7 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
-const API_KEY = "RGAPI-be70fa99-e572-479c-b37a-dbe7c831c715";
+const API_KEY = "RGAPI-842f2bca-7e2a-4631-bee6-8593033190d3";
 let tiergap = 5;
 let guessTier = "";
 
@@ -110,7 +110,7 @@ function getSummoner_tier(summoner_id, summoner_name){
                     console.log(summoner_list);
                 }
             }
-            let table_class = `sec_2_table_td_${count}`
+            let table_class = `sec_3_table_td_${count}`
             document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[count - 1];
             // document.getElementById("inputName").value = "";
             convertScore();
@@ -452,7 +452,7 @@ function showTeam(){
         if(summoner_list[i] === undefined){
             break
         }
-        let table_class = `sec_2_table_td_${i + 1}`
+        let table_class = `sec_3_table_td_${i + 1}`
         document.getElementsByClassName(table_class)[0].innerHTML = summoner_list[i];
     }
 }
@@ -483,14 +483,14 @@ function scoreSummonerSynchronize(){
 }
 
 function showOption(num){ 
-    let classname = `sec_2_table_td_${num}`;
+    let classname = `sec_3_table_td_${num}`;
     let td = document.getElementsByClassName(classname)[0];
     let tdCheck;
     for(let i = 1; i <= 10; i++){
         if(i == num){
             continue
         }
-        classname = `sec_2_table_td_${i}`;
+        classname = `sec_3_table_td_${i}`;
         tdCheck = document.getElementsByClassName(classname)[0];
         if(tdCheck.style.backgroundColor === "rgb(89, 89, 89)"){
             tdCheck.style.backgroundColor = "white";
@@ -509,7 +509,7 @@ function getInputValue(){
     let td;
     let inputValue = "";
     for(let i = 1; i <= 10; i++){
-        classname = `sec_2_table_td_${i}`;
+        classname = `sec_3_table_td_${i}`;
         td = document.getElementsByClassName(classname)[0];
         if(td.style.backgroundColor === "rgb(89, 89, 89)"){
             inputValue = td.innerHTML;
@@ -521,7 +521,7 @@ function getInputValue(){
 function deleteSummoner(){
     let inputValue = getInputValue();
 
-    if(inputValue === ""){
+    if(inputValue === undefined || inputValue === ""){
         console.log("삭제하실 소환사를 선택하세요.");
         return
     }
@@ -531,6 +531,7 @@ function deleteSummoner(){
             summoner_list[i] = "";
             score_list[i] = {name : "", score: 0};
             name_list[i] = "";
+            changeArray(i);
             showTeam();
             return
         }
@@ -538,7 +539,11 @@ function deleteSummoner(){
 }
 
 function modifyTier(){
-    let inputValue = getInputValue();    
+    let inputValue = getInputValue();   
+    if(inputValue === undefined || inputValue === ""){
+        console.log("소환사를 선택해 주십시오.");
+        return
+    }
     let guessTier = "";
     let inputCheck = false;
     let inputValue_array = inputValue.split(" ");
@@ -547,23 +552,22 @@ function modifyTier(){
     for(let i = 0; i < 10; i++){
         if(summoner_list[i] === inputValue){                
             while(true){
-                guessTier = prompt("예상 티어를 적어주세요. EX) 다이아몬드 1 띄어쓰기 필수!!");
-                if(guessTier === "0"){
-                    inputCheck = false;
-                    break
-                }
+                guessTier = document.getElementsByClassName("modifyInput")[0].value;
                 tier_rank = guessTierDivide(guessTier, i, true);
+                console.log(tier_rank);
                 guessTierDivide(guessTier, i);
                 if(guessTierDivide(guessTier, i, true) && guessTierDivide(guessTier, i)){
                     inputCheck = true;
                     break
                 }
-                alert("다시 정확하게 입력해 주세요.\n수정을 취소하시려면 0을 입력해 주세요.");
+                alert("다시 정확하게 입력해 주세요. EX) 다이아몬드 4");
+                return
             }
-            if(!inputCheck){
+            if(inputCheck){
                 for(let i = 1; i < 3; i++){
-                    inputValue_array[i] = tier_rank[i - 1];
+                    inputValue_array[i] = tier_rank[i - 1] + " ";
                 }
+                inputValue_array[0] += " ";
                 inputValue = "";
                 for(let i = 0; i < 4; i++){
                     inputValue += inputValue_array[i];
@@ -574,6 +578,24 @@ function modifyTier(){
                 showTeam();
                 console.log(summoner_list);
             }
+            return
+        }
+    }
+}
+
+function changeArray(index){
+    for(let i = 9; i > index; i--){
+        console.log(summoner_list[i]);
+        if(summoner_list[i] === undefined || summoner_list[i] === ""){
+            continue
+        }
+        else{
+            summoner_list[index] = summoner_list[i];
+            summoner_list[i] = "";
+            score_list[index] = score_list[i];
+            score_list[i] = {name : "", score: 0};
+            name_list[index] = name_list[i];
+            name_list[i] = "";
             return
         }
     }
