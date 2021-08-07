@@ -586,7 +586,7 @@ function modifyTier(){
 function changeArray(index){
     for(let i = 9; i > index; i--){
         if(summoner_list[i] === undefined || summoner_list[i] === ""){
-            continue
+            continue;
         }
         else{
             summoner_list[index] = summoner_list[i];
