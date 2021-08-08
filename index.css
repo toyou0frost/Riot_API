@@ -84,10 +84,18 @@ input:focus{
 }
 
 .sec_2{
-    display: flex;
     justify-content: center;
     padding-top: 30px;
 }
+
+.sec_2 > .modifyInput{
+    padding: 5px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 
 .sec_3{
     display: flex;
