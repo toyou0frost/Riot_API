@@ -6,7 +6,7 @@ let tier_list = new Array(10);
 let rank_list = new Array(10);
 let name_list = new Array(10);
 let score_list = new Array(10);
-const API_KEY = "RGAPI-842f2bca-7e2a-4631-bee6-8593033190d3";
+const API_KEY = "RGAPI-7d4c699f-7ab0-4d8e-a258-129ff608a333";
 let tiergap = 5;
 let guessTier = "";
 
