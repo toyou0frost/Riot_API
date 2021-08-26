@@ -10,6 +10,8 @@ const API_KEY = "RGAPI-7d4c699f-7ab0-4d8e-a258-129ff608a333";
 let tiergap = 5;
 let guessTier = "";
 
+alert("")
+
 for(let i = 0; i < 10; i++){
     score_list[i] = {name: "", score: 0}; 
 }
